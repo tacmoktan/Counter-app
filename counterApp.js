@@ -1,33 +1,47 @@
 let i =0;
 let initialVal=[];
+
 initialVal[i] =0; //for the first counter
-    document.querySelector('.counterDiv p').innerHTML = "initial value = " + initialVal[i];
-    const counter = document.querySelector('.counterDiv ul');
-    //console.log(counter.children[0].firstChild);
-    counter.addEventListener('click',function(e){
-        if (e.target.className=="button"){
-            //console.log(e.target);
-            if(e.target == counter.children[0].firstElementChild){
-                initialVal[i]+=1;
-            }
-            else if(e.target == counter.children[1].firstElementChild){
-                initialVal[i]-=1;
-            }
-            document.querySelector('.wrapper .result').innerHTML = "Result = " + initialVal[i];
-        // console.log(initialVal);
+
+document.querySelector(".master .wrapper").id=i.toString(); //adds id = 0 in wrapper
+document.querySelector('.counterDiv p').innerHTML = "initial value = " + initialVal[i];
+//const counter = document.querySelector('.counterDiv ul');
+const master = document.getElementsByClassName('master');
+const wrapper = document.getElementById('0');
+//console.log(counter.children[0].firstChild);
+wrapper.addEventListener('click',function(e){
+    let targetWrapper = e.target.parentNode.parentNode.parentNode.parentNode;
+    let ID=targetWrapper.id; 
+    
+    i = parseInt(ID);  
+    //console.log(i);  
+    if (e.target.className=="button"){
+            //console.log("clicked");
+            
+        if(e.target.name =="increment"){
+            initialVal[i]+=1;
         }
+        else if(e.target.name == "decrement"){
+            initialVal[i]-=1;
+        }
+        document.querySelector('.wrapper .result').innerHTML = "Result = " + initialVal[i];
+        // console.log(initialVal);
+    }
 });
     
-
-    //console.log('inside second operation')
-    const master = document.getElementsByClassName('master');
-    const addCounter = document.querySelector('.wrapper .addcounter');
-    const wrapper = document.getElementsByClassName('wrapper');
-    addCounter.addEventListener('click',function(e){
+let temp =0;
+let incCount = 10;
+let decCount = 10;
+const addCounter = document.querySelector('.addcounter');
+addCounter.addEventListener('click',function(e){
         i++;
+        incCount++;
+        decCount++;
         //create elements
         const wrap = document.createElement('div');
         wrap.classList.add('wrapper');
+        wrap.id = i.toString();
+       // console.log(wrap);
 
         const countDiv = document.createElement('div');
         countDiv.classList.add('counterDiv');
@@ -47,10 +61,12 @@ initialVal[i] =0; //for the first counter
         buttonInc.classList.add('button');
         buttonInc.type = "button";
         buttonInc.name="increment";
+        buttonInc.id= incCount.toString();
         const buttonDec = document.createElement('button');
         buttonDec.classList.add('button');
         buttonDec.type = "button";
         buttonDec.name="decrement";
+        buttonDec.id= decCount.toString();
         //console.log(buttonInc);
         //console.log(buttonDec);
 
@@ -81,30 +97,38 @@ initialVal[i] =0; //for the first counter
         buttonDec.textContent= "-decrement";
         h32.textContent= "Result = 0";
        // buttonAdd.textContent = "Add Counter";
-        const mast = e.target.parentNode.parentNode;
-        console.log(mast);
+        const container = e.target.parentNode;
+        const mast = container.firstElementChild;
         mast.appendChild(wrap);
+        //console.log(mast);
+        //console.log(wrap);
         //wrapper with id;
         
         initialVal[i] = 0;
-        console.log(initialVal[i]);
+
         mast.lastChild.querySelector('.counterDiv p').innerHTML = "initial value = " + initialVal[i];
-        const counter = mast.lastChild.querySelector('.counterDiv ul');
-        //console.log(counter.children[0].firstChild);
-        counter.addEventListener('click',function(e){
-            //console.log(e.target);
+        temp =i ;
+        console.log(temp);
+        mast.addEventListener('click',function(e){
+            
+            //console.log('clicked');
+            let targetWrapper = e.target.parentNode.parentNode.parentNode.parentNode;
+            let ID = targetWrapper.id;
             if (e.target.className=="button"){
-            //console.log(e.target);
-                if(e.target == counter.children[0].firstElementChild){
-                initialVal[i]+=1;
-                }
-                else if(e.target == counter.children[1].firstElementChild){
-                    initialVal[i]-=1;
-                }
-                mast.lastChild.querySelector('.result').innerHTML = "Result = " + initialVal[i];
-            // console.log(initialVal);
-            }
-        });
+                i = parseInt(ID);
+                console.log(i);
+                if(i !=0){
+                    if(e.target.name == "increment" ){
+                        initialVal[i]+=1;
+                    }
+                    else if(e.target.name == "decrement"){
+                        initialVal[i]-=1;
+                    }
+                    targetWrapper.querySelector('.result').innerHTML = "Result = " + parseInt((initialVal[i])/temp);
+
+                }}
+                i = temp;
+            });
         
     });
 
