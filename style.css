@@ -2,14 +2,39 @@ body{
     margin:0px;
     padding:0px;
 }
-
+body #master{
+    margin:20px auto;
+    padding:0px;
+    width:90%;
+    max-width: 960px;
+    background-color: rgb(194, 113, 55);
+    text-align:center;
+    border-radius: 5px;
+    overflow: hidden;
+}
+#addcounter{
+    margin:10px;
+    padding:15px;
+    background:rgb(27, 27, 27);
+    color:white;
+    border-radius:5px;
+    cursor: pointer;
+}
 .counter {
     margin:5px;
     padding:5px;
+    background-color: rgb(164, 195, 196);
+    text-align:center;
+    border-radius:5px;
+    color:white;
+
 }
 .counter button{
     margin:5px;
     padding:5px;
-    background:black;
+    background:rgb(27, 27, 27);
     color:white;
+    border-radius:5px;
+    width:50px;
+    cursor: pointer;
 }
